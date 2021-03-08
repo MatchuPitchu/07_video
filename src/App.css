@@ -1,38 +1,110 @@
-.App {
-  text-align: center;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.nav-item {
+  color: #fff;
+  text-decoration: none;
+  padding: 10px;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.nav-item:hover {
+  text-decoration: none;
+  color: rgba(255, 255, 255, 0.836);
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.active {
+  border-left: 10px solid #fff;
+  background-color: #444444;
+  border-radius: 3px;
+  color: #fff;
+  transition: border-width 0.5s linear;
+}
+
+/* Video Player */
+.controls {
+  visibility: hidden;
+  opacity: 0.5;
+  width: 400px;
+  border-radius: 10px;
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  margin-left: -200px;
+  background-color: black;
+  box-shadow: 3px 3px 5px black;
+  transition: 1s all;
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
+}
+
+.player:hover .controls,
+player:focus .controls {
+  opacity: 1;
+}
+
+button:before {
+  font-family: HeydingsControlsRegular;
+  font-size: 20px;
+  position: relative;
+  content: attr(data-icon);
+  color: #aaa;
+  text-shadow: 1px 1px 0px black;
+}
+
+.timer {
+  line-height: 38px;
+  font-size: 10px;
+  font-family: monospace;
+  text-shadow: 1px 1px 0px black;
   color: white;
+  flex: 5;
+  position: relative;
 }
 
-.App-link {
-  color: #61dafb;
+.timer div {
+  position: absolute;
+  background-color: rgba(255, 255, 255, 0.2);
+  left: 0;
+  top: 0;
+  width: 0;
+  height: 38px;
+  z-index: 2;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.timer span {
+  position: absolute;
+  z-index: 3;
+  left: 19px;
+}
+
+/* React Video Player */
+.player-wrapper {
+  position: relative;
+  padding-top: 56.25%; /* Player ratio: 100 / (1280 / 720) */
+}
+
+.react-player {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.marker {
+  padding: 15px 20px;
+  margin: 20px 0;
+  display: inline-block;
+}
+
+.marker--not-complete {
+  background-color: #375a7f;
+  color: darkgrey;
+  margin: 0 auto;
+}
+
+.marker--is-complete {
+  background-color: white;
+  color: black;
+  margin: 0 auto;
 }

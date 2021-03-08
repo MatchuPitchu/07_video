@@ -1,24 +1,40 @@
-import logo from './logo.svg';
+import React, { useState } from 'react';
+import './bootstrap.css';
 import './App.css';
+import { Switch, Route } from 'react-router-dom';
+import Navbar from './components/Navbar';
+import VideoPlayer from './components/VideoPlayer';
+import About from './components/About';
 
-function App() {
+const App = () => {
+
+  const [watchComplete, setWatchComplete] = useState(false);
+
+  const handleWatchComplete = ( {played} ) => {
+    console.log(watchComplete);
+    console.log(played);
+    if(played >= 0.9 && !watchComplete) {
+      setWatchComplete(true);
+    }
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <Navbar />
+      <Switch>
+        <Route path='/video'>
+          <VideoPlayer
+            url="https://www.youtube.com/embed/blHjS3Gp2jY" 
+            onProgress={handleWatchComplete} />
+          <div className={watchComplete ? 'marker marker--is-complete' : 'marker marker--not-complete'}>
+            Completed
+          </div>
+        </Route>
+        <Route path='/about'>
+          <About />
+        </Route>
+      </Switch>
+    </>
   );
 }
 
